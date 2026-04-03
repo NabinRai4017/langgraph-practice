@@ -97,6 +97,33 @@ class State(MessagesState):
     context: dict
 ```
 
+## Tracing with Langfuse
+
+This project uses [Langfuse](https://langfuse.com) for observability instead of LangSmith.
+
+**1. Add your Langfuse keys to `.env`:**
+
+```
+LANGFUSE_PUBLIC_KEY=pk-lf-...
+LANGFUSE_SECRET_KEY=sk-lf-...
+```
+
+Get them from [cloud.langfuse.com](https://cloud.langfuse.com) → Project Settings → API Keys.
+
+**2. Pass the config when invoking the graph:**
+
+```python
+from src.agent.graph import graph
+from src.agent.tracing import get_run_config
+
+config = get_run_config(session_id="session-1", user_id="user-abc")
+result = graph.invoke({"messages": [("human", "Hello!")]}, config=config)
+```
+
+If `LANGFUSE_PUBLIC_KEY` is not set, `get_run_config()` returns `{}` and tracing is silently skipped.
+
+**Self-hosting Langfuse:** set `LANGFUSE_HOST=http://localhost:3000` in `.env`.
+
 ## Running Tests
 
 ```bash
