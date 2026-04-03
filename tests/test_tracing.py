@@ -2,14 +2,16 @@ import pytest
 from unittest.mock import patch
 
 
-def test_get_run_config_returns_empty_without_keys():
+def test_get_run_config_returns_thread_id_without_langfuse_keys():
     with patch.dict("os.environ", {}, clear=True):
         with patch("dotenv.load_dotenv"):
             from importlib import reload
             import src.agent.tracing as tracing
             reload(tracing)
             config = tracing.get_run_config()
-            assert config == {}
+            assert "configurable" in config
+            assert "thread_id" in config["configurable"]
+            assert "callbacks" not in config
 
 
 def test_get_run_config_returns_callbacks_with_keys():

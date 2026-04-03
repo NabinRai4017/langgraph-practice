@@ -16,7 +16,7 @@ from src.agent.tracing import get_run_config
     reason="LANGFUSE_PUBLIC_KEY or DEEPSEEK_API_KEY not set",
 )
 def test_langfuse_trace_sent():
-    config = get_run_config(session_id="test-session-1", user_id="nabin")
+    config = get_run_config(thread_id="test-session-1", session_id="test-session-1", user_id="nabin")
     result = graph.invoke(
         {"messages": [("human", "What is the capital of France?")]},
         config=config,

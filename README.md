@@ -4,6 +4,18 @@ A minimal LangGraph agent project wired to run with DeepSeek (default), OpenAI, 
 
 ## Releases
 
+### [v1.2.0](https://github.com/NabinRai4017/langgraph-practice/releases/tag/v1.2.0) — Human-in-the-Loop
+- Graph pauses before every tool call via `interrupt_before=["tools"]`
+- `MemorySaver` checkpointer added to persist state across interrupts
+- `chat.py` prompts for approval before tools execute — approve (`y`) or reject (`n`)
+- Rejection injects `ToolMessage` with `as_node="tools"` so the agent re-answers without running real tools
+- `get_run_config()` now always includes `thread_id` (required by checkpointer)
+- 4 new HITL tests: pause, resume, rejection — 17 tests total passing
+
+```bash
+git checkout v1.2.0
+```
+
 ### [v1.1.0](https://github.com/NabinRai4017/langgraph-practice/releases/tag/v1.1.0) — Tavily Search Integration
 - Replaced placeholder search tool with **Tavily** (`TavilySearchResults`, `max_results=3`)
 - Added `langchain-tavily` dependency

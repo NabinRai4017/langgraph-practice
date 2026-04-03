@@ -17,10 +17,17 @@ def get_langfuse_callback():
     return CallbackHandler()
 
 
-def get_run_config(session_id: str | None = None, user_id: str | None = None) -> dict:
-    """Return a LangGraph-compatible config dict with Langfuse tracing attached."""
-    handler = get_langfuse_callback()
-    if handler is None:
-        return {}
+def get_run_config(
+    thread_id: str | None = None,
+    session_id: str | None = None,
+    user_id: str | None = None,
+) -> dict:
+    """Return a LangGraph-compatible config dict with thread_id and Langfuse tracing."""
+    import uuid
+    config: dict = {"configurable": {"thread_id": thread_id or str(uuid.uuid4())}}
 
-    return {"callbacks": [handler]}
+    handler = get_langfuse_callback()
+    if handler:
+        config["callbacks"] = [handler]
+
+    return config
