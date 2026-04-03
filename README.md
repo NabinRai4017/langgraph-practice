@@ -4,6 +4,16 @@ A minimal LangGraph agent project wired to run with DeepSeek (default), OpenAI, 
 
 ## Releases
 
+### [v1.1.0](https://github.com/NabinRai4017/langgraph-practice/releases/tag/v1.1.0) — Tavily Search Integration
+- Replaced placeholder search tool with **Tavily** (`TavilySearchResults`, `max_results=3`)
+- Added `langchain-tavily` dependency
+- Added `TAVILY_API_KEY` to `.env.example`
+- All 13 pytest tests passing
+
+```bash
+git checkout v1.1.0
+```
+
 ### [v1](https://github.com/NabinRai4017/langgraph-practice/releases/tag/v1) — Sample Tests
 Initial working version of the LangGraph agent. Includes:
 - LangGraph agent with DeepSeek as the default LLM (`deepseek-chat`)

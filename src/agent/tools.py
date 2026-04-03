@@ -1,10 +1,8 @@
-from langchain_core.tools import tool
+from dotenv import load_dotenv
+from langchain_tavily import TavilySearch
 
+load_dotenv()
 
-@tool
-def search(query: str) -> str:
-    """Search for information on the web. Replace this with a real search tool."""
-    return f"Results for: {query}"
-
+search = TavilySearch(max_results=3)
 
 tools = [search]
