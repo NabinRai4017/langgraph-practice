@@ -2,6 +2,20 @@
 
 A minimal LangGraph agent project wired to run with DeepSeek (default), OpenAI, or Anthropic.
 
+## Releases
+
+### [v1](https://github.com/NabinRai4017/langgraph-practice/releases/tag/v1) — Sample Tests
+Initial working version of the LangGraph agent. Includes:
+- LangGraph agent with DeepSeek as the default LLM (`deepseek-chat`)
+- Switchable LLM providers: DeepSeek, OpenAI, Anthropic
+- Langfuse tracing (v4) auto-attached at graph level — works in LangGraph Studio and `chat.py`
+- 13 pytest tests covering graph, state, tools, tracing, and Langfuse integration
+- Interactive `chat.py` script for testing messages locally
+
+```bash
+git checkout v1
+```
+
 ## Project Structure
 
 ```
@@ -9,15 +23,21 @@ langgraph/
 ├── pyproject.toml          # Dependencies and project config
 ├── langgraph.json          # LangGraph server config
 ├── .env.example            # Environment variable template
+├── chat.py                 # Interactive CLI for testing messages
 ├── src/
 │   └── agent/
 │       ├── state.py        # Graph state definition
 │       ├── model.py        # LLM setup (provider switching)
 │       ├── tools.py        # Tool definitions
 │       ├── nodes.py        # Node functions and routing logic
-│       └── graph.py        # Graph assembly and compile
+│       ├── tracing.py      # Langfuse tracing setup
+│       └── graph.py        # Graph assembly, compile, and tracing attachment
 └── tests/
-    └── test_graph.py       # Basic graph tests
+    ├── test_graph.py                 # Graph unit tests
+    ├── test_state.py                 # State tests
+    ├── test_tools.py                 # Tool tests
+    ├── test_tracing.py               # Tracing unit tests
+    └── test_langfuse_integration.py  # Live Langfuse integration test
 ```
 
 ## Graph Flow
